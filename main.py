@@ -27,7 +27,13 @@ class APIClientView:
     def __init__(self, root):
         self.root = root
         self.root.title("POSTMateRest")
+        self.mensaje = tk.StringVar()
+        self.mensaje.set("Bienvenido a POSTMateRest v 1.0")
         self.root.configure(bg="#458588")
+
+        # Info Label
+        self.info_label = tk.Label(self.root, textvariable=self.mensaje, bg="#458588", fg="#d79921")
+        self.info_label.pack()
 
         tab_control = ttk.Notebook(root)
         style = ttk.Style()
@@ -49,16 +55,16 @@ class APIClientView:
         self.url_get_entry.pack()
 
         # Boton GET
-        self.image_get = PhotoImage(file="get_img.gif")
-        self.get_button = tk.Button(tab_get, image=self.image_get)
-        #self.get_button = tk.Button(tab_get, text="GET")
+        #self.image_get = PhotoImage(file="get_img.gif")
+        #self.get_button = tk.Button(tab_get, image=self.image_get)
+        self.get_button = tk.Button(tab_get, text="GET")
         self.get_button.pack()
 
         # POST section
         self.url_label = tk.Label(tab_post, text="URL:", bg="#3c3836", fg="#cc241d")
         self.url_label.pack()
 
-        self.url_post_entry = tk.Entry(tab_post)
+        self.url_post_entry = tk.Entry(tab_post, bg="#8ec07c",width=110)
         self.url_post_entry.pack()
 
         self.post_button = tk.Button(tab_post, text="POST")
@@ -83,6 +89,7 @@ class APIClientController:
         url = self.view.url_get_entry.get()        
         response = self.model.send_get_request(url)
         print(response)
+        self.view.mensaje.set("GET Exitoso")
         self.view.response_text.delete("1.0", tk.END)
         self.view.response_text.insert(tk.END, response)
 
