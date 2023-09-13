@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, PhotoImage
 import requests
+import json
 
 class APIClientModel:
     def __init__(self):
@@ -102,11 +103,16 @@ class APIClientController:
 
     def send_post_request(self):
         url = self.view.url_post_entry.get()
-        print(self.view.data_text.get("1.0", "end-1c"))
-        data = {"key": "value"}  # Replace with your POST data
-        response = self.model.send_post_request(url, data)
+        data = self.view.data_text.get("1.0", "end-1c")
+
+        # str convert to json
+        parametros = json.loads(data)
+        response = self.model.send_post_request(url, parametros)
         self.view.response_text.delete("1.0", tk.END)
         self.view.response_text.insert(tk.END, response)
+
+        # Mensaje
+        self.view.mensaje.set("POST realizado")
 
 if __name__ == "__main__":
     root = tk.Tk()
