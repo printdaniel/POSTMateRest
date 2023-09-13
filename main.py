@@ -65,7 +65,7 @@ class APIClientView:
         self.response_label = tk.Label(root, text="Response:")
         self.response_label.pack()
 
-        self.response_text = tk.Text(root, height=10, width=40)
+        self.response_text = tk.Text(root, height=20, width=50)
         self.response_text.pack()
 
 class APIClientController:
@@ -77,8 +77,9 @@ class APIClientController:
         self.view.post_button.config(command=self.send_post_request)
 
     def send_get_request(self):
-        url = self.view.url_entry.get()
+        url = self.view.url_get_entry.get()        
         response = self.model.send_get_request(url)
+        print(response)
         self.view.response_text.delete("1.0", tk.END)
         self.view.response_text.insert(tk.END, response)
 
