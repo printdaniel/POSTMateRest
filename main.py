@@ -67,6 +67,13 @@ class APIClientView:
         self.url_post_entry = tk.Entry(tab_post, bg="#8ec07c",width=110)
         self.url_post_entry.pack()
 
+        # DATA Entry
+        self.data_label = tk.Label(tab_post, text="Parametros", bg="#3c3836", fg="#cc241d")
+        self.data_label.pack()
+
+        self.data_text = tk.Text(tab_post, width=50, height=10, bg="#8ec07c")
+        self.data_text.pack()
+
         self.post_button = tk.Button(tab_post, text="POST")
         self.post_button.pack()
 
@@ -94,7 +101,8 @@ class APIClientController:
         self.view.response_text.insert(tk.END, response)
 
     def send_post_request(self):
-        url = self.view.url_entry.get()
+        url = self.view.url_post_entry.get()
+        print(self.view.data_text.get("1.0", "end-1c"))
         data = {"key": "value"}  # Replace with your POST data
         response = self.model.send_post_request(url, data)
         self.view.response_text.delete("1.0", tk.END)
