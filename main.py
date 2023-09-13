@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, PhotoImage
 import requests
 
 class APIClientModel:
@@ -45,10 +45,13 @@ class APIClientView:
         self.url_label = tk.Label(tab_get, text="URL:", bg="#3c3836", fg="#cc241d")
         self.url_label.pack()
 
-        self.url_get_entry = tk.Entry(tab_get, bg="#8ec07c")
+        self.url_get_entry = tk.Entry(tab_get, bg="#8ec07c",width=110)
         self.url_get_entry.pack()
 
-        self.get_button = tk.Button(tab_get, text="GET")
+        # Boton GET
+        self.image_get = PhotoImage(file="get_img.gif")
+        self.get_button = tk.Button(tab_get, image=self.image_get)
+        #self.get_button = tk.Button(tab_get, text="GET")
         self.get_button.pack()
 
         # POST section
@@ -62,7 +65,7 @@ class APIClientView:
         self.post_button.pack()
 
         # RESPONSE Section
-        self.response_label = tk.Label(root, text="Response:")
+        self.response_label = tk.Label(root, text="Response:", bg="#458588", fg="#cc241d")
         self.response_label.pack()
 
         self.response_text = tk.Text(root, height=20, width=50)
