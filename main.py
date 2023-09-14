@@ -1,7 +1,8 @@
 import tkinter as tk
-from tkinter import ttk, PhotoImage
+from tkinter import ttk
 import requests
 import json
+
 
 class APIClientModel:
     def __init__(self):
@@ -24,6 +25,7 @@ class APIClientModel:
         except Exception as e:
             return str(e)
 
+
 class APIClientView:
     def __init__(self, root):
         self.root = root
@@ -33,7 +35,9 @@ class APIClientView:
         self.root.configure(bg="#458588")
 
         # Info Label
-        self.info_label = tk.Label(self.root, textvariable=self.mensaje, bg="#458588", fg="#d79921")
+        self.info_label = tk.Label(
+            self.root, textvariable=self.mensaje, bg="#458588", fg="#d79921"
+        )
         self.info_label.pack()
 
         tab_control = ttk.Notebook(root)
@@ -48,16 +52,16 @@ class APIClientView:
         tab_control.add(tab_get, text="GET")
         tab_control.add(tab_post, text="POST")
         tab_control.pack(expand=1, fill="both")
-        
+
         self.url_label = tk.Label(tab_get, text="URL:", bg="#3c3836", fg="#cc241d")
         self.url_label.pack()
 
-        self.url_get_entry = tk.Entry(tab_get, bg="#8ec07c",width=110)
+        self.url_get_entry = tk.Entry(tab_get, bg="#8ec07c", width=110)
         self.url_get_entry.pack()
 
         # Boton GET
-        #self.image_get = PhotoImage(file="get_img.gif")
-        #self.get_button = tk.Button(tab_get, image=self.image_get)
+        # self.image_get = PhotoImage(file="get_img.gif")
+        # self.get_button = tk.Button(tab_get, image=self.image_get)
         self.get_button = tk.Button(tab_get, text="GET")
         self.get_button.pack()
 
@@ -65,11 +69,13 @@ class APIClientView:
         self.url_label = tk.Label(tab_post, text="URL:", bg="#3c3836", fg="#cc241d")
         self.url_label.pack()
 
-        self.url_post_entry = tk.Entry(tab_post, bg="#8ec07c",width=110)
+        self.url_post_entry = tk.Entry(tab_post, bg="#8ec07c", width=110)
         self.url_post_entry.pack()
 
         # DATA Entry
-        self.data_label = tk.Label(tab_post, text="Parametros", bg="#3c3836", fg="#cc241d")
+        self.data_label = tk.Label(
+            tab_post, text="Parametros", bg="#3c3836", fg="#cc241d"
+        )
         self.data_label.pack()
 
         self.data_text = tk.Text(tab_post, width=50, height=10, bg="#8ec07c")
@@ -79,11 +85,14 @@ class APIClientView:
         self.post_button.pack()
 
         # RESPONSE Section
-        self.response_label = tk.Label(root, text="Response:", bg="#458588", fg="#cc241d")
+        self.response_label = tk.Label(
+            root, text="Response:", bg="#458588", fg="#cc241d"
+        )
         self.response_label.pack()
 
         self.response_text = tk.Text(root, height=20, width=50)
         self.response_text.pack()
+
 
 class APIClientController:
     def __init__(self, model, view):
@@ -91,11 +100,11 @@ class APIClientController:
         Maneja la solicitud POST al hacer clic en el botón correspondiente.
 
         Obtiene la URL y los datos JSON desde la vista, realiza la solicitud POST
-        a través del modelo, actualiza la vista con la respuesta y establece un 
+        a través del modelo, actualiza la vista con la respuesta y establece un
         mensaje de estado.
         """
-        self.model = model # instancia del modelo
-        self.view = view # instancia de la vista
+        self.model = model  # instancia del modelo
+        self.view = view  # instancia de la vista
 
         self.view.get_button.config(command=self.send_get_request)
         self.view.post_button.config(command=self.send_post_request)
@@ -107,14 +116,13 @@ class APIClientController:
         Obtiene la URL desde la vista, realiza la solicitud GET a través del modelo,
         actualiza la vista con la respuesta y establece un mensaje de estado.
         """
-        url = self.view.url_get_entry.get()        
+        url = self.view.url_get_entry.get()
         response = self.model.send_get_request(url)
 
         # Actualizar el mensaje de estado en la vista
         self.view.mensaje.set("GET Exitoso")
 
-        # Borra el contenido actual del área respuesta y muestra
-        # la respuesta nueva
+        # Borra la respuesta y muestra para dejar la nueva
         self.view.response_text.delete("1.0", tk.END)
         self.view.response_text.insert(tk.END, response)
 
@@ -123,7 +131,7 @@ class APIClientController:
         Maneja la solicitud POST al hacer clic en el botón correspondiente.
 
         Obtiene la URL y los datos JSON desde la vista, realiza la solicitud POST
-        a través del modelo, actualiza la vista con la respuesta y establece 
+        a través del modelo, actualiza la vista con la respuesta y establece
         un mensaje de estado.
         """
         url = self.view.url_post_entry.get()
@@ -137,6 +145,7 @@ class APIClientController:
 
         # Mensaje
         self.view.mensaje.set("POST realizado")
+
 
 if __name__ == "__main__":
     root = tk.Tk()
