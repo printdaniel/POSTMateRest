@@ -8,4 +8,3 @@ quería era algo simple y sin complicaciones: solo ingresar los endpoints y
 los parámetros, y que funcione. Así nació la idea de **POSTMateRest**
 
 ---
-
