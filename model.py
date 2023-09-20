@@ -1,5 +1,6 @@
 import requests
-import json
+import tkinter as tk
+from tkinter import ttk
 
 class APIClientModel:
     def __init__(self):

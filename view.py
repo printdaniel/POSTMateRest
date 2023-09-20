@@ -72,5 +72,3 @@ class APIClientView:
 
         self.response_text = tk.Text(root, height=20, width=50, bg="#d79921")
         self.response_text.pack()
-
-
