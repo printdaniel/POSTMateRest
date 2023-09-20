@@ -24,15 +24,22 @@ class APIClientView:
         style = ttk.Style()
         style.configure("Tab.TFrame", background="#3c3836", foreground="red")
 
+        # Tab (pestañas) section ----------------------------------------------
         tab_get = ttk.Frame(tab_control, style="Tab.TFrame")
-        tab_post = ttk.Frame(tab_control, style="Tab.TFrame")
         tab_get.pack_propagate(False)
+
+        tab_post = ttk.Frame(tab_control, style="Tab.TFrame")
         tab_post.pack_propagate(False)
+
+        tab_put = ttk.Frame(tab_control, style="Tab.TFrame")
+        tab_put.pack_propagate(False)
 
         tab_control.add(tab_get, text="GET")
         tab_control.add(tab_post, text="POST")
+        tab_control.add(tab_put, text="PUT")
         tab_control.pack(expand=1, fill="both")
 
+        # GET section ---------------------------------------------------------
         self.url_label = tk.Label(tab_get, text="URL:", bg="#3c3836", fg="#cc241d")
         self.url_label.pack()
 
@@ -45,7 +52,7 @@ class APIClientView:
         self.get_button = tk.Button(tab_get, text="GET")
         self.get_button.pack()
 
-        # POST section
+        # POST section -------------------------------------------------------
         self.url_label = tk.Label(tab_post, text="URL:", bg="#3c3836", fg="#cc241d")
         self.url_label.pack()
 
@@ -58,13 +65,33 @@ class APIClientView:
         )
         self.data_label.pack()
 
-        self.data_text = tk.Text(tab_post, width=50, height=10, bg="#8ec07c")
-        self.data_text.pack()
+        self.data_post_text = tk.Text(tab_post, width=50, height=10, bg="#8ec07c")
+        self.data_post_text.pack()
 
         self.post_button = tk.Button(tab_post, text="POST")
         self.post_button.pack()
 
-        # RESPONSE Section
+
+        # PUT section ---------------------------------------------------------
+        self.url_label = tk.Label(tab_put, text="URL:", bg="#3c3836", fg="#cc241d")
+        self.url_label.pack()
+
+        self.url_put_entry = tk.Entry(tab_put, bg="#8ec07c", width=110)
+        self.url_put_entry.pack()
+
+        # DATA Entry
+        self.data_label = tk.Label(
+            tab_put, text="Parametros", bg="#3c3836", fg="#cc241d"
+        )
+        self.data_label.pack()
+
+        self.data_put_text = tk.Text(tab_put, width=50, height=10, bg="#8ec07c")
+        self.data_put_text.pack()
+
+        self.put_button = tk.Button(tab_put, text="PUT")
+        self.put_button.pack()
+
+        # RESPONSE Section ----------------------------------------------------
         self.response_label = tk.Label(
             root, text="Response:", bg="#458588", fg="#cc241d"
         )
